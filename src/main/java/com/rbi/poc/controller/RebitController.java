@@ -8,20 +8,31 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/zones")
 public class ZoneController {
-
 
     @Autowired
     private ZoneService zoneService;
 
     @PostMapping("/saveZone")
     @ResponseStatus(HttpStatus.CREATED)
-    public String saveZone(@RequestBody Zone zone){
-        System.out.println("Inside saveZone");
-        zoneService.saveZone(zone);
+    public String saveZone(@RequestBody Map<String, String> requestBody){
+        String zoneName = requestBody.get("zoneName");
+        System.out.println("Inside saveZone--" + zoneName);
+        zoneService.saveZone(zoneName);
+
+        return "Zone refreshed successfully";
+    }
+
+    @PostMapping("/saveModule")
+    @ResponseStatus(HttpStatus.CREATED)
+    public String saveModule(@RequestBody Map<String, String> requestBody){
+        String moduleName = requestBody.get("moduleName");
+        System.out.println("Inside saveZone--" + moduleName);
+        zoneService.saveModule(moduleName);
 
         return "Zone refreshed successfully";
     }
