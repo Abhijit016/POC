@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import java.io.*;
 
 @Service
-public class ZoneService {
+public class RebitService {
 
     @Autowired
     private ZoneRepository zoneRepository;
@@ -35,7 +35,7 @@ public class ZoneService {
         zoneRepository.save(zoneEntity);
     }
 
-    public void saveModule(String moduleName){
+    public void saveModule(String zoneName, String moduleName){
         System.out.println("Inside saveZone service method");
         String moduleJson = readFile();
         Module moduleEntity;

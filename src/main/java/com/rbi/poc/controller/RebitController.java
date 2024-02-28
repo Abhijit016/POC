@@ -1,28 +1,25 @@
 package com.rbi.poc.controller;
 
-import com.rbi.poc.model.Zone;
-import com.rbi.poc.repository.ZoneRepository;
-import com.rbi.poc.service.ZoneService;
+import com.rbi.poc.service.RebitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/zones")
-public class ZoneController {
+public class RebitController {
 
     @Autowired
-    private ZoneService zoneService;
+    private RebitService rebitService;
 
     @PostMapping("/saveZone")
     @ResponseStatus(HttpStatus.CREATED)
     public String saveZone(@RequestBody Map<String, String> requestBody){
         String zoneName = requestBody.get("zoneName");
         System.out.println("Inside saveZone--" + zoneName);
-        zoneService.saveZone(zoneName);
+        rebitService.saveZone(zoneName);
 
         return "Zone refreshed successfully";
     }
@@ -31,8 +28,9 @@ public class ZoneController {
     @ResponseStatus(HttpStatus.CREATED)
     public String saveModule(@RequestBody Map<String, String> requestBody){
         String moduleName = requestBody.get("moduleName");
+        String zoneName = requestBody.get("zoneName");
         System.out.println("Inside saveZone--" + moduleName);
-        zoneService.saveModule(moduleName);
+        rebitService.saveModule(zoneName, moduleName);
 
         return "Zone refreshed successfully";
     }
